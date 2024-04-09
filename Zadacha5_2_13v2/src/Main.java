@@ -18,11 +18,12 @@ public class Main {
         System.out.println(symmetricDifference(plenty1, plenty2));
     }
 
-    public static <T> Set<T> symmetricDifference(Set plenty1, Set plenty2) {
+    public static <T> Set<T> symmetricDifference(Set<T> plenty1, Set<T> plenty2) {
         Set<T> result = new HashSet<>(plenty1);
-        result.retainAll(plenty2);
-        plenty1.addAll(plenty2);
-        plenty1.removeAll(result);
-        return plenty1;
+        Set<T> retain = new HashSet<>(plenty2);
+        retain.retainAll(plenty1);
+        result.addAll(plenty2);
+        result.removeAll(retain);
+        return result;
     }
 }
