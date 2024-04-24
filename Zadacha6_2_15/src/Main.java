@@ -7,7 +7,9 @@ public class Main {
         System.out.println(factorial(3));
     }
     public static BigInteger factorial(int value){
-        if(value < 2 ) return BigInteger.valueOf(1);
+        if(value < 2 ) {
+            return BigInteger.valueOf(1);
+        }
         return IntStream.rangeClosed(2, value).mapToObj(BigInteger::valueOf).reduce(BigInteger::multiply).get();
 
     }
