@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
         Arrays.stream(bufferedReader.lines().collect(Collectors.joining())
                         .toLowerCase()
                         .split("[\\p{Punct}\\s]+"))
