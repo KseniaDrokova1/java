@@ -1,8 +1,6 @@
 import java.util.*;
 import java.util.function.Consumer;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
         String randomFrom = "Alice"; // Некоторая случайная строка. Можете выбрать ее самостоятельно.
@@ -94,6 +92,7 @@ public class Main {
         }
 
         public String getFrom() {
+
             return from;
         }
 
@@ -120,6 +119,7 @@ public class Main {
         }
 
         public String getFrom() {
+
             return from;
         }
 
@@ -134,41 +134,30 @@ public class Main {
 
     public static class MailService<T> implements Consumer<Sendable<T>> {
 
+
         Map<String, List<T>> mailBox = new HashMap<String, List<T>>();
 
-        public Map<String, List<T>> getMailBox() {
-
+        public MailService() {
+            mailBox = new HashMap<>();
             Map<String, List<T>> resultMailBox = new HashMap<String, List<T>>() {
-
                 @Override
                 public List<T> get(Object key) {
 
-                    if (mailBox.containsKey(key)) {
-                        return mailBox.get(key);
-                    } else {
-                        return new ArrayList<>();
-                    }
+                    return mailBox.get(key);
+
                 }
             };
-
-            return resultMailBox;
         }
 
-        List<T> chat = new ArrayList<>();
+        public Map<String, List<T>> getMailBox() {
+            return mailBox;
+        }
 
         @Override
         public void accept(Sendable<T> t) {
+            mailBox.computeIfAbsent(t.getTo(), k -> new LinkedList<>()).add(t.getContent());
 
-            if (mailBox.containsKey(t.getTo())) {
-                chat = mailBox.get(t.getTo());
-                chat.add(t.getContent());
-                mailBox.put(t.getTo(), chat);
-            } else {
-                List<T> newChat = new ArrayList<>();
-                newChat.add(t.getContent());
-                mailBox.put(t.getTo(), newChat);
-
-            }
         }
+
     }
 }
