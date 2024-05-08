@@ -138,12 +138,11 @@ public class Main {
         Map<String, List<T>> mailBox = new HashMap<String, List<T>>();
 
         public MailService() {
-            mailBox = new HashMap<>();
-            Map<String, List<T>> resultMailBox = new HashMap<String, List<T>>() {
+            mailBox = new HashMap<String, List<T>>() {
                 @Override
                 public List<T> get(Object key) {
 
-                    return mailBox.get(key);
+                    return super.getOrDefault (key, new LinkedList<T> ());
 
                 }
             };
